@@ -1,20 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="theme-color" content="#1a1c29">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta charset="UTF-8"> <!-- content="define a cor do fundo do android e ios"-->
+    <meta name="theme-color" content="rgb(123, 35, 223)"> <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
     <title>Site de testes</title>
 </head>
 <body ontouchstart="">
-   <div id="debug-info">Detectando sistema...</div>
+    <div id="debug-info">Detectando sistema...</div>
 
-        <button class="btn-adaptativo" id="meu-botao">
-        Weslley Kauã
+    <div class="botões">
+        <button class="btn-adaptativo">
+            happy
         </button>
 
-        <script src="script.js"></script>
-    <script src="{{ url_for('static', filename='css/js/script.js') }}"></script>
+        <button class="btn-adaptativo dois">
+            Enviar arquivo!
+        </button>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

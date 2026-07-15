@@ -9,7 +9,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(49, 99, 206);
+  background: rgb(123, 35, 223); /* O seu azul original intacto */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow: hidden;
   color: #ffffff;
@@ -17,7 +17,7 @@ body {
 
 #debug-info {
   position: absolute;
-  top: calc(12px + env(safe-area-inset-top)); /* Evita o notch do iPhone */
+  top: calc(12px + env(safe-area-inset-top)); /* Evita o notch do iPhone 13 */
   font-size: 14px;
   opacity: 0.6;
   background: rgba(255, 255, 255, 0.1);
@@ -28,7 +28,28 @@ body {
 /* ==========================================
    2. DESIGN BASE (DESKTOP / PADRÃO)
    ========================================== */
+
+.botões {
+  display: flex;
+  flex-direction: column; /* Alinha os botões verticalmente */
+  align-items: center; /* Centraliza os botões horizontalmente */
+  gap: 20px; /* Espaçamento entre os botões */
+}
+
 .btn-adaptativo {
+  /* TOKENS DE CORES (VARIÁVEIS) PRONTOS PARA USO */
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --hover-bg: #e0e0e0;
+
+  --android-bg: #237bdf;
+  --android-text: #ffffff;
+  --android-hover: #1d62b6;
+
+  --ios-bg: rgba(255, 255, 255, 0.08);
+  --ios-border: rgba(255, 255, 255, 0.25);
+  --ios-text: #ffffff;
+
   position: relative;
   overflow: hidden;
   padding: 14px 28px;
@@ -38,22 +59,23 @@ body {
   border: none;
   outline: none;
   transition: all 0.3s ease;
+  min-width: 200px;
   
-  /* Bloqueio de seleção de texto e menus popup */
+  /* Bloqueio de seleção de texto e menus popup no Mobile */
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
 
-  /* Estilo padrão: Desktop */
-  background-color: #ffffff;
-  color: #000000;
+  /* Aplicação das cores */
+  background-color: var(--bg-color);
+  color: var(--text-color);
   border-radius: 8px;
 }
 
 .btn-adaptativo:hover {
-  background-color: #e0e0e0;
+  background-color: var(--hover-bg);
   transform: translateY(-2px);
 }
 
@@ -61,11 +83,11 @@ body {
    3. DESIGN ADAPTADO: IPHONE (iOS)
    ========================================== */
 .ios-theme .btn-adaptativo {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: var(--ios-bg);
+  color: var(--ios-text);
   font-weight: 600;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--ios-border);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
@@ -74,11 +96,11 @@ body {
 
 .ios-theme .btn-adaptativo:hover {
   background: rgba(255, 255, 255, 0.15);
-  transform: none; /* iOS anula a flutuação do desktop */
+  transform: none;
 }
 
 .ios-theme .btn-adaptativo:active {
-  transform: scale(0.93) translateY(1px); /* Efeito elástico de clique */
+  transform: scale(0.93) translateY(1px);
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
@@ -87,8 +109,8 @@ body {
    4. DESIGN ADAPTADO: ANDROID
    ========================================== */
 .android-theme .btn-adaptativo {
-  background-color: #6750A4;
-  color: #ffffff;
+  background-color: var(--android-bg);
+  color: var(--android-text);
   border-radius: 100px;
   padding: 16px 32px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 1px rgba(0, 0, 0, 0.12);
@@ -97,9 +119,9 @@ body {
 }
 
 .android-theme .btn-adaptativo:hover {
-  background-color: #49397a;
+  background-color: var(--android-hover);
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  transform: scale(0.93) translateY(0.5px);
+  transform: scale(0.95) translateY(0.5px);
 }
 
 /* Efeito Ripple (Android) */
