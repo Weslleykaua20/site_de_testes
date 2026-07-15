@@ -1,12 +1,120 @@
+/* ==========================================
+   1. ESTILOS GERAIS & FUNDO
+   ========================================== */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    text-align: center;
-    margin-top: 50px;
+  margin: 0;
+  padding: 0;
+  height: 100dvh; /* Ajuste dinâmico para evitar quebras no Safari */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(49, 99, 206);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow: hidden;
+  color: #ffffff;
 }
- 
-h1 {
-    color: #2c8ce5;
+
+#debug-info {
+  position: absolute;
+  top: calc(12px + env(safe-area-inset-top)); /* Evita o notch do iPhone */
+  font-size: 14px;
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
 }
- 
+
+/* ==========================================
+   2. DESIGN BASE (DESKTOP / PADRÃO)
+   ========================================== */
+.btn-adaptativo {
+  position: relative;
+  overflow: hidden;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+  
+  /* Bloqueio de seleção de texto e menus popup */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  /* Estilo padrão: Desktop */
+  background-color: #ffffff;
+  color: #000000;
+  border-radius: 8px;
+}
+
+.btn-adaptativo:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   3. DESIGN ADAPTADO: IPHONE (iOS)
+   ========================================== */
+.ios-theme .btn-adaptativo {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
+}
+
+.ios-theme .btn-adaptativo:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: none; /* iOS anula a flutuação do desktop */
+}
+
+.ios-theme .btn-adaptativo:active {
+  transform: scale(0.93) translateY(1px); /* Efeito elástico de clique */
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* ==========================================
+   4. DESIGN ADAPTADO: ANDROID
+   ========================================== */
+.android-theme .btn-adaptativo {
+  background-color: #6750A4;
+  color: #ffffff;
+  border-radius: 100px;
+  padding: 16px 32px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 1px rgba(0, 0, 0, 0.12);
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.android-theme .btn-adaptativo:hover {
+  background-color: #49397a;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  transform: scale(0.93) translateY(0.5px);
+}
+
+/* Efeito Ripple (Android) */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-effect 0.6s linear;
+  background-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

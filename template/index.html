@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1c29">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Site de testes</title>
 </head>
-<body>
-    <h1>Funcionou!</h1>
-    <p>Se você está vendo essa página, o Flask e o index.html estão conectados certinho.</p>
+<body ontouchstart="">
+   <div id="debug-info">Detectando sistema...</div>
+
+        <button class="btn-adaptativo" id="meu-botao">
+        Weslley Kauã
+        </button>
+
+        <script src="script.js"></script>
     <script src="{{ url_for('static', filename='css/js/script.js') }}"></script>
 </body>
 </html>
