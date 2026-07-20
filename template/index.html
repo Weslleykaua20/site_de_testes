@@ -12,16 +12,43 @@
     <title>Site de testes</title>
 </head>
 <body ontouchstart="">
-    <div id="debug-info">Detectando sistema...</div>
-
+    <div class="pagina-inicial">
+        <div class="carrossel_de_album" id="carrossel-container">
+                  <!-- O JavaScript vai injetar os álbuns aqui dentro -->
+        </div>
+    </div>
+   
     <div class="botões">
-        <button class="btn-adaptativo">
-            happy
+        <button class="btn-bolha-adaptativo">
+            <img class="voltar" src="{{ url_for('static', filename='img/voltar.png') }}" alt="Voltar">
         </button>
 
-        <button class="btn-adaptativo dois">
+        <button class="btn-adaptativo">
             Enviar arquivo!
         </button>
+    </div>
+
+        <!-- A TELA DO ÁLBUM (Escondida por padrão) -->
+    <div class="album-view-overlay" id="album-view">
+        <div class="album-view-header">
+            <!-- O seu botão de voltar (btn-bolha) entra aqui para fechar a tela -->
+            <button class="btn-bolha-adaptativo" id="btn-fechar-album">
+                <img class="voltar" src="{{ url_for('static', filename='img/voltar.png') }}" alt="Voltar">
+            </button>
+        </div>
+        
+            <div class="album-view-content" id="album-view-content">
+        <div style="text-align: center; padding: 20px;">
+            <img id="detail-img" src="" style="width: 250px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <h2 class="text-adaptativo" id="detail-title" style="margin-top: 20px;"></h2>
+            <p class="color-adaptativa--muted" id="detail-artist"></p>
+            
+            <!-- O Player de Áudio -->
+            <audio id="audio-player" controls style="margin-top: 20px; width: 100%; max-width: 300px;">
+                <source src="" type="audio/mpeg">
+            </audio>
+        </div>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

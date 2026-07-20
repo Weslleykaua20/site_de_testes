@@ -1,101 +1,273 @@
 /* ==========================================
-   1. ESTILOS GERAIS & FUNDO
+   0. TOKENS GLOBAIS / VARIÁVEIS
+   ========================================== */
+:root {
+  --app-bg: #03031d;
+  --app-text: #ffffff;
+  --app-muted: rgba(255, 255, 255, 0.7);
+
+  --surface-desktop: #ffffff;
+  --surface-android: #237bdf;
+  --surface-android-hover: #1d62b6;
+  --surface-ios: rgba(255, 255, 255, 0.08);
+  --surface-ios-hover: rgba(255, 255, 255, 0.15);
+  --border-ios: rgba(255, 255, 255, 0.25);
+  --border-ios-strong: rgba(255, 255, 255, 0.3);
+
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-body);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-pill: 100px;
+
+  --transition: 0.25s ease;
+}
+
+/* ==========================================
+   1. BASE DA PÁGINA
    ========================================== */
 body {
   margin: 0;
   padding: 0;
-  height: 100dvh; /* Ajuste dinâmico para evitar quebras no Safari */
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background: rgb(123, 35, 223); /* O seu azul original intacto */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  overflow: hidden;
-  color: #ffffff;
-}
-
-#debug-info {
-  position: absolute;
-  top: calc(12px + env(safe-area-inset-top)); /* Evita o notch do iPhone 13 */
-  font-size: 14px;
-  opacity: 0.6;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 8px 16px;
-  border-radius: 20px;
+  background: var(--app-bg);
+  font-family: var(--font-body);
+  color: var(--app-text);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
 }
 
 /* ==========================================
-   2. DESIGN BASE (DESKTOP / PADRÃO)
+   2. TAGS GLOBAIS ADAPTATIVAS
    ========================================== */
 
-.botões {
-  display: flex;
-  flex-direction: column; /* Alinha os botões verticalmente */
-  align-items: center; /* Centraliza os botões horizontalmente */
-  gap: 20px; /* Espaçamento entre os botões */
-}
-
+/* TAG GLOBAL ADAPTATIVA: .btn-adaptativo */
 .btn-adaptativo {
-  /* TOKENS DE CORES (VARIÁVEIS) PRONTOS PARA USO */
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --hover-bg: #e0e0e0;
-
-  --android-bg: #237bdf;
-  --android-text: #ffffff;
-  --android-hover: #1d62b6;
-
-  --ios-bg: rgba(255, 255, 255, 0.08);
-  --ios-border: rgba(255, 255, 255, 0.25);
-  --ios-text: #ffffff;
+  --btn-bg: var(--surface-desktop);
+  --btn-text: #000000;
+  --btn-hover-bg: #e0e0e0;
+  --btn-radius: var(--radius-sm);
 
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px 28px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
+  min-width: 200px;
   border: none;
   outline: none;
-  transition: all 0.3s ease;
-  min-width: 200px;
-  
-  /* Bloqueio de seleção de texto e menus popup no Mobile */
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
-
-  /* Aplicação das cores */
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  border-radius: 8px;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-radius: var(--btn-radius);
 }
 
 .btn-adaptativo:hover {
-  background-color: var(--hover-bg);
+  background-color: var(--btn-hover-bg);
   transform: translateY(-2px);
 }
 
-/* ==========================================
-   3. DESIGN ADAPTADO: IPHONE (iOS)
-   ========================================== */
-.ios-theme .btn-adaptativo {
-  background: var(--ios-bg);
-  color: var(--ios-text);
-  font-weight: 600;
+/* TAG GLOBAL ADAPTATIVA: .btn-bolha-adaptativo */
+.btn-bolha-adaptativo {
+  --btn-bolha-bg: var(--surface-desktop);
+  --btn-bolha-text: #000000;
+  --btn-bolha-hover-bg: #e0e0e0;
+  --btn-bolha-radius: 999px;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  transition: background-color var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--btn-bolha-bg);
+  color: var(--btn-bolha-text);
+  border-radius: var(--btn-bolha-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.btn-bolha-adaptativo:hover {
+  background-color: var(--btn-bolha-hover-bg);
+  transform: translateY(-1px);
+}
+
+.btn-bolha-adaptativo:active {
+  transform: scale(0.94);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* TAG GLOBAL ADAPTATIVA: .img-adaptativa */
+.img-adaptativa {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: transform var(--transition), box-shadow var(--transition), border-radius var(--transition);
+}
+
+.img-adaptativa:hover {
+  transform: scale(1.02);
+}
+
+/* Estilo sutil de imagem para o tema iOS */
+.ios-theme .img-adaptativa {
   border-radius: 16px;
-  border: 1px solid var(--ios-border);
+  border: 0.45px solid var(--border-ios);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+.ios-theme .capa-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 16px;
+}
+
+.ios-theme .capa-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  border: 0.45px solid var(--ios-border);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+/* TAG GLOBAL ADAPTATIVA: .text-adaptativo */
+.text-adaptativo {
+  color: var(--app-text);
+  font-family: var(--font-heading);
+}
+
+/* TAG GLOBAL ADAPTATIVA: .color-adaptativa */
+.color-adaptativa {
+  color: var(--app-text);
+}
+
+.color-adaptativa--muted {
+  color: var(--app-muted);
+}
+
+/* TAG GLOBAL ADAPTATIVA: .surface-adaptativa */
+.surface-adaptativa {
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ==========================================
+   3. ESTILOS POR SISTEMA (DESKTOP / ANDROID / IOS)
+   ========================================== */
+
+/* Desktop / padrão */
+.btn-adaptativo {
+  --btn-bg: var(--surface-desktop);
+  --btn-text: #000000;
+  --btn-hover-bg: #e0e0e0;
+  --btn-radius: var(--radius-sm);
+}
+
+.btn-bolha-adaptativo {
+  --btn-bolha-bg: var(--surface-desktop);
+  --btn-bolha-text: #000000;
+  --btn-bolha-hover-bg: #e0e0e0;
+}
+
+.btn-bolha-adaptativo img {
+  filter: brightness(0) saturate(0%);
+}
+
+/* Android (Material 3) */
+.android-theme .btn-adaptativo {
+  --btn-bg: var(--surface-android);
+  --btn-text: var(--app-text);
+  --btn-hover-bg: var(--surface-android-hover);
+  --btn-radius: var(--radius-pill);
+  padding: 16px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 1px rgba(0, 0, 0, 0.12);
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.android-theme .btn-adaptativo:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: scale(0.95) translateY(0.5px);
+}
+
+.android-theme .img-adaptativa {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.android-theme .btn-bolha-adaptativo {
+  --btn-bolha-bg: var(--surface-android);
+  --btn-bolha-text: var(--app-text);
+  --btn-bolha-hover-bg: var(--surface-android-hover);
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 2px 1px rgba(0, 0, 0, 0.12);
+}
+
+.android-theme .btn-bolha-adaptativo:hover {
+  transform: scale(0.95) translateY(0.5px);
+}
+
+.android-theme .btn-bolha-adaptativo:active {
+  transform: scale(0.9);
+}
+
+.android-theme .surface-adaptativa {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* iOS (Liquid Glass) */
+.ios-theme .btn-adaptativo {
+  --btn-bg: var(--surface-ios);
+  --btn-text: var(--app-text);
+  --btn-hover-bg: var(--surface-ios-hover);
+  --btn-radius: var(--radius-md);
+  border: 1px solid var(--border-ios);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+  font-weight: 600;
   letter-spacing: 1px;
 }
 
 .ios-theme .btn-adaptativo:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--surface-ios-hover);
   transform: none;
 }
 
@@ -105,26 +277,181 @@ body {
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
+.ios-theme .btn-bolha-adaptativo {
+  --btn-bolha-bg: var(--surface-ios);
+  --btn-bolha-text: var(--app-text);
+  --btn-bolha-hover-bg: var(--surface-ios-hover);
+  border: 1px solid var(--border-ios);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), inset 0 1px 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+
+.ios-theme .btn-bolha-adaptativo img {
+  filter: brightness(1) saturate(1%);
+}
+
+.ios-theme .btn-bolha-adaptativo:hover {
+  background: var(--surface-ios-hover);
+  transform: none;
+}
+
+.ios-theme .btn-bolha-adaptativo:active {
+  transform: scale(0.93);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ios-theme .surface-adaptativa {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-ios);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+.ios-theme .text-adaptativo {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
 /* ==========================================
-   4. DESIGN ADAPTADO: ANDROID
+   4. ELEMENTOS DA PÁGINA (EXEMPLOS)
    ========================================== */
-.android-theme .btn-adaptativo {
-  background-color: var(--android-bg);
-  color: var(--android-text);
-  border-radius: 100px;
-  padding: 16px 32px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 1px rgba(0, 0, 0, 0.12);
-  font-weight: 500;
-  letter-spacing: 0.1px;
+.pagina-inicial {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-.android-theme .btn-adaptativo:hover {
-  background-color: var(--android-hover);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  transform: scale(0.95) translateY(0.5px);
+.carrossel_de_album {
+  margin: 3rem 2rem 0 2rem;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
+  width: 90%;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-/* Efeito Ripple (Android) */
+.carrossel_de_album::-webkit-scrollbar {
+  display: none;
+}
+
+.album {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+}
+
+.capa-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.img-album {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.capa-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-ios);
+  pointer-events: none;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+.album h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.album p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.voltar {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+.btn-bolha-adaptativo img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.botões {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* ==========================================
+   5. SPA: TELA DE ÁLBUM (OVERLAY)
+   ========================================== */
+.album-view-overlay {
+  position: fixed;
+  top: 0; left: 0; 
+  width: 100vw; height: 100dvh;
+  background: var(--app-bg);
+  z-index: 100; /* Fica por cima de tudo na página */
+  
+  /* Aqui está a mágica: a tela começa 100% empurrada para baixo (escondida) */
+  transform: translateY(100%); 
+  
+  /* Uma transição de curva elástica para imitar a fluidez nativa do iOS */
+  transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1); 
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quando o JS injetar essa classe, a tela desliza para a posição 0 (cobre a tela) */
+.album-view-overlay.ativa {
+  transform: translateY(0);
+}
+
+.album-view-header {
+  padding: max(16px, env(safe-area-inset-top)) 20px 10px 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+
+
+
+
+
+/* -------------------------------
+
+Efeito Ripple (Android)
+
+-----------------------------------*/
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -133,6 +460,8 @@ body {
   background-color: rgba(255, 255, 255, 0.35);
   pointer-events: none;
 }
+
+
 
 @keyframes ripple-effect {
   to {
